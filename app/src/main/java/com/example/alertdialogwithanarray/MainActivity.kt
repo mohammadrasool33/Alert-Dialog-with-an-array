@@ -16,16 +16,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val btn: Button =findViewById(R.id.button)
         var option=arrayOf("mohammad","ahmad","hawkar")
-        var alertDialog=AlertDialog.Builder(this).setTitle("Choose to add").setSingleChoiceItems(option,0){_,i->
-            Toast.makeText(this,"you chose ${option[i]}", Toast.LENGTH_LONG).show()
-        }.setPositiveButton("Accept"){_,_->
-            Toast.makeText(this,"you accepted",Toast.LENGTH_LONG).show()
-        }.setNegativeButton("Decline"){_,_->
-            Toast.makeText(this,"you Declined",Toast.LENGTH_LONG).show()
-        }.create()
+        var alertDialog=AlertDialog.Builder(this).setTitle("choose").setMultiChoiceItems(option,
+            booleanArrayOf(false,false,false)
+        ){_,i,isChecked->
+            if (isChecked){
+                Toast.makeText(this,"you checked ${option[i]}",Toast.LENGTH_LONG).show()
+            }
+            else{
+                Toast.makeText(this,"you unchecked ${option[i]}",Toast.LENGTH_LONG).show()
+            }
+        }.setPositiveButton("Accept"){_,_-> Toast.makeText(this,"you accepted",Toast.LENGTH_LONG).show()}.setNegativeButton("Decline"){_,_->Toast.makeText(this,"you added me",Toast.LENGTH_LONG).show()}.create()
 
         btn.setOnClickListener {
             alertDialog.show()
         }
+
+
     }
 }
